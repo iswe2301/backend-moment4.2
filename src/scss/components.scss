@@ -1,0 +1,208 @@
+@use 'abstracts';
+
+/* STYLING FÖR KNAPPAR */
+
+// Inkluderar stil för standard knappar genom extend
+#submit,
+#submit-change {
+    @extend %button-style;
+    width: 50%;
+    height: 4rem;
+    margin: 2rem 0 0 50%;
+    font-size: 1.6rem;
+    background-color: abstracts.$link-color;
+
+    &:hover {
+        background-color: darken(abstracts.$hover-color, 10%);
+    }
+}
+
+.delete-btn {
+    @extend %button-style;
+    width: 15rem;
+    height: 3.5rem;
+    font-size: 1.8rem;
+    padding: 0;
+    margin: 0.6rem 0;
+    background-color: abstracts.$delete-btn-color;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-decoration: none;
+
+    &:hover {
+        background-color: darken(abstracts.$delete-btn-color, 10%);
+        color: abstracts.$light-text-color;
+    }
+}
+
+#edit-container {
+    display: none;
+    width: 100%;
+
+    h3 {
+        margin: 2rem 0 2rem 2rem;
+    }
+}
+
+.edit-btn {
+    @extend %button-style;
+    width: 15rem;
+    height: 3.5rem;
+    font-size: 1.8rem;
+    padding: 0;
+    margin: 0.6rem 0;
+    background-color: abstracts.$edit-btn-color;
+
+    &:hover {
+        background-color: darken(abstracts.$edit-btn-color, 10%);
+    }
+}
+
+// Fixerar bakgrundsblder (picture-tagg) med 100% höjd/bredd
+.body-background {
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+// Sätter bakgrundsbilde till 100% höjd/bredd och cover för att bilden ska täcka enligt rätt förhållanden
+#background-img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+// Storlek för bilder
+img {
+    width: 100%;
+    height: auto;
+}
+
+#signature {
+    margin: 2rem auto;
+    max-width: 300px;
+}
+
+// Döljer overlay initialt
+#overlay.hidden {
+    display: none;
+}
+
+// Klass för opacitet när mobilmeny öppnas (JS)
+#overlay.opacity {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+// ID-styling för felmeddelande
+#error-message {
+    display: none;
+    justify-content: center;
+    color: abstracts.$delete-btn-color;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+// Styling för obligatorisk *
+.required {
+    color: abstracts.$delete-btn-color;
+}
+
+// Styling för popup vid klick på skapa jobberfarenhet
+.popup {
+    width: 100%;
+    height: 0;
+    background-color: abstracts.$link-color;
+    color: white;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    font-size: 1.8rem;
+    line-height: 2.6rem;
+    font-family: abstracts.$font-text;
+    letter-spacing: 0.2rem;
+    font-weight: 600;
+    transition: height 1s; // Lägger transition på höjden, höjden ändras under 1 sekund
+    z-index: 5;
+    box-shadow: 0px -4px 10px 0px rgb(0 0 0 / 20%); // Skugga
+}
+
+// Styling för när popup visas
+.popup.show {
+    height: 5rem;
+    padding: 1rem;
+}
+
+/* Styling för tooltip med hjälp-cursor */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+}
+
+/* Döljer tooltip initialt, stylar boxen och text, transition 0.5 sekunders opacity, absolut positionering */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 100%;
+    max-width: 30rem;
+    background-color: abstracts.$transparent-grey;
+    color: abstracts.$light-text-color;
+    font-size: 1.4rem;
+    text-align: center;
+    border-radius: 5px;
+    padding: 2rem 1rem;
+    position: absolute;
+    z-index: 1;
+    bottom: 4rem;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+/* 100% opacity när tooltip visas vid hover */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+// Ökar bredd vid mindre skrämar (max 1024px)
+@media (max-width: 1024px) {
+    .popup.show {
+        height: 7rem;
+    }
+}
+
+// Styling vid mindre skrämar (max 600px)
+@media (max-width: 600px) {
+
+    #submit,
+    #submit-change {
+        width: 100%;
+        margin: 2rem 0 0 0;
+    }
+
+    .delete-btn,
+    .edit-btn {
+        width: 100%;
+        justify-content: center;
+
+        i {
+            margin-left: 1rem;
+        }
+    }
+
+    .popup.show {
+        height: 8rem;
+    }
+}
