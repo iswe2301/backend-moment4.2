@@ -16,7 +16,6 @@
 </head>
 
 <body>
-    <div id="overlay" class="hidden"></div>
     <!-- Picturetagg med bakgrundbild i olika filformat / storlekar -->
     <picture class="body-background">
         <source srcset="images/background.jpg?as=avif" media="(min-width: 1921px)" type="image/avif">
@@ -48,13 +47,9 @@
             <a href="/"><img src="images/logo.svg" alt="Logotyp WorkXperience"></a>
         </header>
 
-        <span>Inloggad som: </span>
-
         <h1>JOBBERFARENHETER</h1>
-        <p>Klicka på knappen för att hämta jobberfarenheter.</p>
-        <button>Hämta jobberfarenheter</button>
+        <span id="logged-in"></span>
         <section id="work-container">
-            <h2>Mina jobberfarenheter</h2>
         </section>
     </main>
 
