@@ -16,7 +16,6 @@
 </head>
 
 <body>
-    <div id="overlay" class="hidden"></div>
     <!-- Picturetagg med bakgrundbild i olika filformat / storlekar -->
     <picture class="body-background">
         <source srcset="images/background.jpg?as=avif" media="(min-width: 1921px)" type="image/avif">
@@ -46,6 +45,25 @@
         <header>
             <a href="/"><img src="images/logo.svg" alt="Logotyp WorkXperience"></a>
         </header>
+
+        <div class="login-section">
+            <h1>Skapa användarkonto</h1>
+            <form id="userForm" metod="POST">
+                <div class="form-group">
+                    <label for="new-username">Användarnamn</label>
+                    <input type="text" id="new-username" name="username" required
+                        placeholder="Ange ditt användarnamn...">
+                </div>
+                <div class="form-group">
+                    <label for="new-password">Lösenord</label>
+                    <input type="password" id="new-password" name="password" required placeholder="Ange ditt lösenord">
+                </div>
+                <span id="error-message"></span>
+                <button type="submit" id="submit-user">Skapa konto</button>
+            </form>
+            <p>Har du redan ett konto? <a href="index.html">Logga in</a></p>
+        </div>
+        <span class="popup"></span>
     </main>
 
     <!-- Footer -->
