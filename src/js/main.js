@@ -26,7 +26,7 @@ function init() {
     const username = localStorage.getItem("username"); // Hämtar lösenordet från localStorage
     // Kontrollerar om användarnamnet finns och om element för att skriva ut info finns på sidan
     if (username && loggedInUser) {
-        loggedInUser.innerHTML = `Inloggad som: ${username}`; // Sätter innehåll till span
+        loggedInUser.innerHTML = `<i class="fa-solid fa-user"></i> Inloggad som: ${username}`; // Sätter innehåll till span
     }
 
     // Kontrollerar om logga-ut knappen finns på sidan
