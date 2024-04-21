@@ -1,79 +1,78 @@
 "use strict";
 
-// Importerar modul
-import { fetchExperiences } from './experiences.js';
-import { createExperience } from './add.js';
+// Importerar moduler
+import { loginUser } from "./login.js";
+import { createUser } from "./create.js";
+import { fetchExperiences } from "./get.js";
 
 // Hämtar element och lagrar i variabler
-const menuToggle = document.querySelector(".menu-toggle");
-const mobileMenu = document.querySelector(".mobile-menu");
-const menuIcon = document.querySelector(".fa-bars");
-const closeIcon = document.querySelector(".fa-xmark");
-const containerEl = document.getElementById("overlay");
-const submitBtn = document.getElementById("submit");
-const formEl = document.getElementById("form-container");
+const loginBtn = document.getElementById("submit-login");
+const loginForm = document.getElementById("loginForm");
+const userBtn = document.getElementById("submit-user");
+const userForm = document.getElementById("userForm");
+const loggedInUser = document.getElementById("logged-in")
+const logOutBtn = document.getElementById("log-out");
 export let errorMsg = document.getElementById("error-message");
-
-// Skapar klickhändelselyssnare för menyknappen, anonym funktion
-menuToggle.addEventListener("click", () => {
-    mobileMenu.classList.toggle("show"); // Växlar mellan klassen show för att visa/dölja mobilmenyn
-    containerEl.classList.toggle("opacity"); // Växlar mellan visa/dölja opacity när menyn klickas
-
-    // Kontrollerar om mobilmenyn visas eller inte
-    if (mobileMenu.classList.contains("show")) {
-        // Om menyn visas, gör hamburgerikonen osynlig och kryssikonen synlig
-        menuIcon.style.opacity = "0";
-        closeIcon.style.opacity = "1";
-        closeIcon.style.transform = "translate(-50%, -50%) rotate(360deg)"; // Animerar kryssikonen med en rotation på 360 grader
-    } else {
-        // Om menyn inte visas, gör hamburgerikonen synlig och kryssikonen osynlig
-        menuIcon.style.opacity = "1";
-        closeIcon.style.opacity = "0";
-        closeIcon.style.transform = "translate(-50%, -50%) rotate(-360deg)"; // Återställer kryssikonens rotation
-    }
-});
 
 // Skapar initieringsfunktion som körs när webbsidan laddats
 window.onload = init;
 function init() {
-    fetchExperiences(); // Anropar funktion för att hämta arbetserfarenheter
 
-    // Kontrollerar om formuläret finns på sidan
-    if (formEl) {
+    // Kontrollerar om sökvägen innehåller "/get"
+    if (window.location.pathname.includes("/get")) {
+        fetchExperiences(); // Anropar isåfall funktion för att hämta jobberfarenheter
+    }
+
+    const username = localStorage.getItem("username"); // Hämtar lösenordet från localStorage
+    // Kontrollerar om användarnamnet finns och om element för att skriva ut info finns på sidan
+    if (username && loggedInUser) {
+        loggedInUser.innerHTML = `Inloggad som: ${username}`; // Sätter innehåll till span
+    }
+
+    // Kontrollerar om logga-ut knappen finns på sidan
+    if (logOutBtn) {
+        // Skapar händelselyssnare vid klick
+        logOutBtn.addEventListener("click", () => {
+            localStorage.clear() // Tömmer localStorage
+            window.location.href = "/index.html"; // Omdirigerar till startsidan
+        });
+    }
+
+    // Kontrollerar om formulär för att logga in finns på sidan
+    if (loginForm) {
         // Skapar isåfall en händelselyssnare vid klick
-        submitBtn.addEventListener("click", (event) => {
+        loginBtn.addEventListener("click", (event) => {
             event.preventDefault(); // Förhindrar formulärets standardbeteende (så att sidan inte laddas om)
-            // Förhindrar formuläret från att skickas om det inte är giltigt
-            if (!formEl.checkValidity()) {
-                errorMsg.style.display = "flex"; // Visar felmeddelandet om formuläret inte är giltigt
-            } else {
-                errorMsg.style.display = "none"; // Döljer felmeddelandet om formuläret är giltigt
-
-                // Hämtar värdena från formuläret
-                const companyname = document.getElementById('companyname').value;
-                const jobtitle = document.getElementById('jobtitle').value;
-                const location = document.getElementById('location').value;
-                const startdate = document.getElementById('startdate').value;
-                const enddate = document.getElementById('enddate').value;
-                const description = document.getElementById('description').value;
-
-                // Anropar funktion för att skapa ny jobberfarenhet, skickar med värdena från formuläret
-                createExperience(companyname, jobtitle, location, startdate, enddate, description);
-            }
+            loginUser();  // Anropar loginUser funktionen
         });
 
-        // Hämtar alla input, date och textarea-element från formuläret och lagrar i variabel
-        const formInputs = formEl.querySelectorAll("input, date, textarea");
+        // Hämtar alla input-element från formuläret och lagrar i variabel
+        const formInputs = loginForm.querySelectorAll("input");
 
-        // Lägger till händelselyssnare för varje input och select i formuläret
+        // Lägger till händelselyssnare för varje input i formuläret
         formInputs.forEach(input => {
             input.addEventListener("input", () => {
-                // Kontrollerar om formuläret är giltigt
-                if (formEl.checkValidity()) {
-                    errorMsg.style.display = "none"; // Döljer felmeddelandet när fomruläret är giltigt
-                }
+                errorMsg.style.display = "none"; // Döljer felmeddelandet vid input
             });
         });
     }
 
+    // Kontrollerar om formulär för att skapa ny användare finns på sidan
+    if (userForm) {
+        // Skapar isåfall en händelselyssnare vid klick
+        userBtn.addEventListener("click", (event) => {
+            event.preventDefault(); // Förhindrar formulärets standardbeteende (så att sidan inte laddas om)
+            createUser();  // Anropar createUser funktionen
+        });
+
+        // Hämtar alla input-element från formuläret och lagrar i variabel
+        const formInputs = userForm.querySelectorAll("input");
+
+        // Lägger till händelselyssnare för varje input i formuläret
+        formInputs.forEach(input => {
+            input.addEventListener("input", () => {
+                errorMsg.style.display = "none"; // Döljer felmeddelandet vid input
+            });
+        });
+    }
 };
