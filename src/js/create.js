@@ -41,6 +41,7 @@ export async function createUser() {
 
             // Vid lyckat svar
         } else {
+
             // Lagrar variabel för popup
             let popupMsg = document.querySelector(".popup");
             popupMsg.classList.add("show"); // Lägger till klassen show för popup när erfarenheten har skapats
@@ -50,6 +51,7 @@ export async function createUser() {
             setTimeout(function () {
                 popupMsg.classList.remove("show"); // Tar bort show-klassen
                 popupMsg.innerHTML = ""; // Tömmer innehållet
+                
                 // Omdirigerar användaren till startsidan efter att popupen har dolts
                 setTimeout(function () {
                     window.location.href = "index.html";

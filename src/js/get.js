@@ -8,11 +8,13 @@ let contentEl = document.getElementById("content");
 export async function fetchExperiences() {
     const url = "https://backend-moment4-1.onrender.com/api/experiences"; // Lagrar url för API
     const token = localStorage.getItem("JWT"); // Hämtar token från localStorage
+
+    // Skickar ett GET-anrop med fetch API till webbtjänsten, skickar med token i header
     try {
         const response = await fetch(url, {
             method: "GET",
             headers: {
-                "Authorization": "Bearer " + token, // Skickar med token
+                "Authorization": "Bearer " + token,
                 "Content-Type": "application/json"
             }
         });
@@ -24,12 +26,14 @@ export async function fetchExperiences() {
             alert(`${data.message}. Du är inte inloggad eller din session har gått ut. Vänligen logga in igen.`); // Skriver ut felmeddelande till klienten
             window.location.href = "/index.html"; // Omdirigerar till inloggningssidan
             return;
+
             // Vid lyckat svar
         } else {
             displayExperiences(data); // Anropar funktion för att visa erfarenheter med svaret från anropet
         }
+        
     } catch (error) {
-        console.error('Felmeddelande:', error); // Fångar upp ev. felmeddelanden
+        console.error("Något gick fel vid hämtning av erfarenheter: " , error); // Fångar upp ev. felmeddelanden
     }
 }
 

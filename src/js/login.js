@@ -10,11 +10,13 @@ export async function loginUser() {
     const password = document.getElementById("password").value; // Hämtar lösenordet från formuläret
 
     try {
+
         // Skapar nytt objekt för användaren
         const userInfo = {
             username: username,
             password: password
         }
+
         // Skickar ett POST-anrop med fetch API till webbtjänsten med objektet som skapats för användaren
         const response = await fetch(url, {
             method: "POST",
@@ -23,6 +25,7 @@ export async function loginUser() {
             },
             body: JSON.stringify(userInfo)
         });
+        
         const data = await response.json(); // Inväntar svar och omvandlar till json
 
         // Kontrollerar om svaret är lyckat eller inte
