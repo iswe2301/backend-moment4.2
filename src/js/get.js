@@ -1,16 +1,16 @@
 "use strict";
 
 // Hämtar element från DOM
-let loadingEl = document.getElementById("loading");
-let contentEl = document.getElementById("content");
+const loadingEl = document.getElementById("loading");
+const contentEl = document.getElementById("content");
+const loadingIcon = document.querySelector(".loader");
 
 // Asynkron funktion för att hämta data (exporteras som modul)
 export async function fetchExperiences() {
     const url = "https://backend-moment4-1.onrender.com/api/experiences"; // Lagrar url för API
     const token = localStorage.getItem("JWT"); // Hämtar token från localStorage
-    const loadingEl = document.querySelector(".loader"); // Hämtar ikon för laddningssymbol
 
-    loadingEl.style.display = "block"; // Visar laddningsikon
+    loadingIcon.style.display = "block"; // Visar laddningsikon
 
     // Skickar ett GET-anrop med fetch API till webbtjänsten, skickar med token i header
     try {
@@ -45,7 +45,7 @@ export async function fetchExperiences() {
 // Funktion för att visa befintliga jobberfarenheter
 function displayExperiences(experiences) {
 
-    loadingEl.style.display = "none"; // Döljer laddningsikon
+    loadingIcon.style.display = "none"; // Döljer laddningsikon
     loadingEl.style.display = "none"; // Döljer span för "laddning" av sidan
     contentEl.style.display = "block"; // Visar innehållet på sidan
 
