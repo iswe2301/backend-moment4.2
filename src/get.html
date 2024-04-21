@@ -42,15 +42,24 @@
     <!-- Huvudinnehåll -->
     <main>
 
-        <!-- Header med logotyp och navmeny -->
+        <!-- Header med logotyp -->
         <header>
             <a href="/"><img src="images/logo.svg" alt="Logotyp WorkXperience"></a>
         </header>
 
-        <h1>JOBBERFARENHETER</h1>
-        <span id="logged-in"></span>
-        <section id="work-container">
-        </section>
+        <div id="content">
+            <div id="user-manager">
+                <!-- Knapp för att logga ut, visar användarnman från JS -->
+                <span id="logged-in"></span>
+                <button id="log-out">Logga ut <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+            </div>
+            <!-- Huvudinnehåll som läses in från JS -->
+            <h1>JOBBERFARENHETER</h1>
+            <section id="work-container">
+            </section>
+        </div>
+        <!-- Visas när användaren inte är behörig / innan content laddats in korrekt -->
+        <span id="loading">Laddar innehåll...</span>
     </main>
 
     <!-- Footer -->
@@ -59,7 +68,6 @@
         <p>DT207G Backend-baserad webbutveckling</p>
         <p>Webbutvecklingsprogrammet, Mittuniversitetet</p>
     </footer>
-
 </body>
 
 </html>
