@@ -8,6 +8,7 @@ export async function createUser() {
     const url = "https://backend-moment4-1.onrender.com/api/register"; // Lagrar url för API
     const username = document.getElementById("new-username").value; // Hämtar användarnamnet från formuläret
     const password = document.getElementById("new-password").value; // Hämtar lösenordet från formuläret
+    const loadingEl = document.querySelector(".loader"); // Hämtar ikon för laddningssymbol
 
     // Kontrollerar om lösenordet är minst 5 tecken
     if (password.length < 5) {
@@ -16,12 +17,15 @@ export async function createUser() {
         return;
     }
 
+    loadingEl.style.display = "block"; // Visar laddningsikon
+
     try {
         // Skapar nytt objekt för användaren
         const userInfo = {
             username: username,
             password: password
         }
+
         // Skickar ett POST-anrop med fetch API till webbtjänsten med objektet som skapats för användaren
         const response = await fetch(url, {
             method: "POST",
@@ -30,7 +34,10 @@ export async function createUser() {
             },
             body: JSON.stringify(userInfo)
         });
+
         const data = await response.json(); // Inväntar svar och omvandlar till json
+
+        loadingEl.style.display = "none"; // Döljer laddningsikon
 
         // Kontrollerar om svaret var lyckat eller inte
         if (!response.ok) {
@@ -51,14 +58,14 @@ export async function createUser() {
             setTimeout(function () {
                 popupMsg.classList.remove("show"); // Tar bort show-klassen
                 popupMsg.innerHTML = ""; // Tömmer innehållet
-                
+
                 // Omdirigerar användaren till startsidan efter att popupen har dolts
                 setTimeout(function () {
                     window.location.href = "index.html";
                 }, 800); // Omdirigerar användaren till startsidan efter att popupen har dolts, 0.8 sekunders fördröjning
             }, 3000); // 3 sekunder
         }
-        
+
         // Fångar upp ev fel
     } catch (error) {
         console.error("Något gick fel vid inloggning: ", error);
