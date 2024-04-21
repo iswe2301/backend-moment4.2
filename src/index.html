@@ -42,26 +42,32 @@
 
     <!-- Huvudinnehåll -->
     <main>
-        <!-- Header med logotyp och navmeny -->
+        <!-- Header med logotyp -->
         <header>
             <a href="/"><img src="images/logo.svg" alt="Logotyp WorkXperience"></a>
         </header>
 
+        <!-- Formulär för att logga in användare -->
         <div class="login-section">
             <h1>Logga in</h1>
             <form id="loginForm" method="POST">
                 <div class="form-group">
                     <label for="username">Användarnamn</label>
-                    <input type="text" id="username" name="username" required placeholder="Ange ditt användarnamn...">
+                    <input type="text" id="username" name="username" required placeholder="Ange användarnamn...">
                 </div>
                 <div class="form-group">
                     <label for="password">Lösenord</label>
-                    <input type="password" id="password" name="password" required placeholder="Ange ditt lösenord">
+                    <input type="password" id="password" name="password" required placeholder="Ange lösenord...">
                 </div>
                 <span id="error-message"></span>
-                <button type="submit" id="submit-login">Logga in</button>
+                <button type="submit" id="submit-login">Logga in <i
+                        class="fa-solid fa-arrow-right-to-bracket"></i></button>
+                <!-- Länk till att skapa nytt konto -->
+                <div id="user">
+                    <p>Ny användare?</p>
+                    <a href="create.html">Skapa konto</a>
+                </div>
             </form>
-            <p>Ny användare? <a href="create.html">Skapa konto</a></p>
         </div>
     </main>
 
