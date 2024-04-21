@@ -3,59 +3,16 @@
 /* STYLING FÖR KNAPPAR */
 
 // Inkluderar stil för standard knappar genom extend
-#submit,
-#submit-change {
+button {
     @extend %button-style;
     width: 50%;
     height: 4rem;
-    margin: 2rem 0 0 50%;
+    margin: 1rem 0 0 50%;
     font-size: 1.6rem;
     background-color: abstracts.$link-color;
 
     &:hover {
         background-color: darken(abstracts.$hover-color, 10%);
-    }
-}
-
-.delete-btn {
-    @extend %button-style;
-    width: 15rem;
-    height: 3.5rem;
-    font-size: 1.8rem;
-    padding: 0;
-    margin: 0.6rem 0;
-    background-color: abstracts.$delete-btn-color;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    text-decoration: none;
-
-    &:hover {
-        background-color: darken(abstracts.$delete-btn-color, 10%);
-        color: abstracts.$light-text-color;
-    }
-}
-
-#edit-container {
-    display: none;
-    width: 100%;
-
-    h3 {
-        margin: 2rem 0 2rem 2rem;
-    }
-}
-
-.edit-btn {
-    @extend %button-style;
-    width: 15rem;
-    height: 3.5rem;
-    font-size: 1.8rem;
-    padding: 0;
-    margin: 0.6rem 0;
-    background-color: abstracts.$edit-btn-color;
-
-    &:hover {
-        background-color: darken(abstracts.$edit-btn-color, 10%);
     }
 }
 
@@ -82,40 +39,13 @@ img {
     height: auto;
 }
 
-#signature {
-    margin: 2rem auto;
-    max-width: 300px;
-}
-
-// Döljer overlay initialt
-#overlay.hidden {
-    display: none;
-}
-
-// Klass för opacitet när mobilmeny öppnas (JS)
-#overlay.opacity {
-    display: block;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
 // ID-styling för felmeddelande
 #error-message {
     display: none;
     justify-content: center;
     color: abstracts.$delete-btn-color;
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     font-weight: 600;
-}
-
-// Styling för obligatorisk *
-.required {
-    color: abstracts.$delete-btn-color;
 }
 
 // Styling för popup vid klick på skapa jobberfarenhet
@@ -144,36 +74,60 @@ img {
     padding: 1rem;
 }
 
-/* Styling för tooltip med hjälp-cursor */
-.tooltip {
-    position: relative;
-    display: inline-block;
-    cursor: help;
+// Döljer innehåll i content initalt
+#content {
+    display: none;
 }
 
-/* Döljer tooltip initialt, stylar boxen och text, transition 0.5 sekunders opacity, absolut positionering */
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 100%;
-    max-width: 30rem;
-    background-color: abstracts.$transparent-grey;
-    color: abstracts.$light-text-color;
+// Margin för laddningsmeddelande
+#loading {
+    margin-top: 5rem;
+}
+
+// Styling för gruppering av text och länk till logga in/skapa konto
+#user {
     font-size: 1.4rem;
-    text-align: center;
-    border-radius: 5px;
-    padding: 2rem 1rem;
-    position: absolute;
-    z-index: 1;
-    bottom: 4rem;
-    left: 0;
-    opacity: 0;
-    transition: opacity 0.5s;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 1rem 0;
+
+    p {
+        padding-right: 0.5rem;
+    }
+
 }
 
-/* 100% opacity när tooltip visas vid hover */
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
+// Styling för användarhantering (logga ut + info om inloggad användare)
+#user-manager {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 3rem 2rem;
+    i {
+        margin-right: 0.5rem;
+    }
+
+    button {
+        margin: 1rem 0;
+        font-size: 1.4rem;
+        width: 15rem;
+        height: 3rem;
+
+        i {
+            margin-left: 0.3rem;
+        }
+    }
+}
+
+// Styling för logga in/skapa konto
+.login-section {
+    margin-top: 5rem;
+
+    .form-group {
+        margin: 0.5rem 0;
+    }
 }
 
 // Ökar bredd vid mindre skrämar (max 1024px)
@@ -186,20 +140,9 @@ img {
 // Styling vid mindre skrämar (max 600px)
 @media (max-width: 600px) {
 
-    #submit,
-    #submit-change {
+    button {
         width: 100%;
         margin: 2rem 0 0 0;
-    }
-
-    .delete-btn,
-    .edit-btn {
-        width: 100%;
-        justify-content: center;
-
-        i {
-            margin-left: 1rem;
-        }
     }
 
     .popup.show {
